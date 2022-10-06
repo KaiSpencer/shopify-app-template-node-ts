@@ -45,27 +45,7 @@ The following Shopify tools complement these third-party tools to ease app devel
 
 ### Installing the template
 
-This template can be installed using your preferred package manager:
-
-Using yarn:
-
-```shell
-yarn create @shopify/app
-```
-
-Using npx:
-
-```shell
-npm init @shopify/app@latest
-```
-
-Using pnpm:
-
-```shell
-pnpm create @shopify/app@latest
-```
-
-This will clone the template and install the required dependencies.
+Clone this repository :D 
 
 #### Local Development
 
