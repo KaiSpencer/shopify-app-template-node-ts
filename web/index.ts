@@ -9,13 +9,13 @@ import {
   BillingSettings,
 } from "@shopify/shopify-api";
 
-import applyAuthMiddleware from "./middleware/auth.js";
-import verifyRequest from "./middleware/verify-request.js";
-import { setupGDPRWebHooks } from "./gdpr.js";
-import productCreator from "./helpers/product-creator.js";
-import redirectToAuth from "./helpers/redirect-to-auth.js";
-import { AppInstallations } from "./app_installations.js";
-import { environment } from "./environment.js";
+import applyAuthMiddleware from "./middleware/auth";
+import verifyRequest from "./middleware/verify-request";
+import { setupGDPRWebHooks } from "./gdpr";
+import productCreator from "./helpers/product-creator";
+import redirectToAuth from "./helpers/redirect-to-auth";
+import { AppInstallations } from "./app_installations";
+import { environment } from "./environment";
 
 const USE_ONLINE_TOKENS = false;
 
@@ -115,7 +115,7 @@ export async function createServer(
       app.get("use-online-tokens"),
     );
     const { Product } = await import(
-      `@shopify/shopify-api/dist/rest-resources/${Shopify.Context.API_VERSION}/index.js`
+      `@shopify/shopify-api/dist/rest-resources/${Shopify.Context.API_VERSION}/index`
     );
 
     const countData = await Product.count({ session });
@@ -128,11 +128,16 @@ export async function createServer(
       res,
       app.get("use-online-tokens"),
     );
-    let status = 200;
-    let error = null;
+    let status: number = 200;
+    let error: string | null = null;
 
     try {
-      await productCreator(session);
+      if (session != null) {
+        await productCreator(session);
+      } else {
+        status = 401;
+        error = 'Session is null';
+      }
     } catch (e: any) {
       console.log(`Failed to process products/create: ${e.message}`);
       status = 500;
@@ -186,7 +191,7 @@ export async function createServer(
     const appInstalled = await AppInstallations.includes(shop);
 
     if (!appInstalled && !req.originalUrl.match(/^\/exitiframe/i)) {
-      return redirectToAuth(req, res, app);
+      return redirectToAuth(app)(req, res);
     }
 
     if (Shopify.Context.IS_EMBEDDED_APP && req.query.embedded !== "1") {

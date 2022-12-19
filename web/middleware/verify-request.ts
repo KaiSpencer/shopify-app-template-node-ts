@@ -1,12 +1,12 @@
 import { Shopify } from "@shopify/shopify-api";
-import { Application } from "express";
+import { Application, RequestHandler } from "express";
 import ensureBilling, {
   ShopifyBillingError,
-} from "../helpers/ensure-billing.js";
-import redirectToAuth from "../helpers/redirect-to-auth.js";
+} from "../helpers/ensure-billing";
+import redirectToAuth from "../helpers/redirect-to-auth";
 
-import returnTopLevelRedirection from "../helpers/return-top-level-redirection.js";
-import { BillingSettingsType } from "../index.js";
+import returnTopLevelRedirection from "../helpers/return-top-level-redirection";
+import { BillingSettingsType } from "../index";
 
 const TEST_GRAPHQL_QUERY = `
 {
@@ -29,7 +29,7 @@ export default function verifyRequest(
     let shop = Shopify.Utils.sanitizeShop(req.query.shop);
     if (session && shop && session.shop !== shop) {
       // The current request is for a different shop. Redirect gracefully.
-      return redirectToAuth(req, res, app);
+      return redirectToAuth(app)(req, res);
     }
 
     if (session?.isActive()) {

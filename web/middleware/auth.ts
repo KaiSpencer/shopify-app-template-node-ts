@@ -1,9 +1,9 @@
 import { AuthQuery, BillingSettings, Shopify } from "@shopify/shopify-api";
-import { gdprTopics } from "@shopify/shopify-api/dist/webhooks/registry.js";
+import { gdprTopics } from "@shopify/shopify-api/dist/webhooks/registry";
 import { Application } from "express";
-import ensureBilling from "../helpers/ensure-billing.js";
-import redirectToAuth from "../helpers/redirect-to-auth.js";
-import { BillingSettingsType } from "../index.js";
+import ensureBilling from "../helpers/ensure-billing";
+import redirectToAuth from "../helpers/redirect-to-auth";
+import { BillingSettingsType } from "../index";
 
 export default function applyAuthMiddleware(
   app: Application,
@@ -14,10 +14,10 @@ export default function applyAuthMiddleware(
   },
 ) {
   app.get("/api/auth", async (req, res) => {
-    return redirectToAuth(req, res, app);
+    return redirectToAuth(app)(req, res);
   });
 
-  app.get<any, any, any, any, AuthQuery>(
+  app.get<unknown, unknown, unknown, AuthQuery>(
     "/api/auth/callback",
     async (req, res) => {
       try {
@@ -90,7 +90,7 @@ export default function applyAuthMiddleware(
           case e instanceof Shopify.Errors.CookieNotFound:
           case e instanceof Shopify.Errors.SessionNotFound:
             // This is likely because the OAuth session cookie expired before the merchant approved the request
-            return redirectToAuth(req, res, app);
+            return redirectToAuth(app)(req, res);
             break;
           default:
             res.status(500);
