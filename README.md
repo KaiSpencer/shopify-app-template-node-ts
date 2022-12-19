@@ -1,4 +1,7 @@
 # Shopify App Template - Node Typescript
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
@@ -10,6 +13,20 @@ This is a template for building a [Shopify app](https://shopify.dev/apps/getting
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://github.com/cyrilchapon"><img src="https://avatars.githubusercontent.com/u/10728426?v=4?s=100" width="100px;" alt="Cyril CHAPON"/><br /><sub><b>Cyril CHAPON</b></sub></a><br /><a href="https://github.com/KaiSpencer/shopify-app-template-node-ts/commits?author=cyrilchapon" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 
