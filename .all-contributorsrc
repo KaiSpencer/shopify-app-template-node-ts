@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "KaiSpencer",
+      "name": "Kai Spencer",
+      "avatar_url": "https://avatars.githubusercontent.com/u/51139521?v=4",
+      "profile": "https://github.com/KaiSpencer",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "shopify-app-template-node-ts",
+  "projectOwner": "KaiSpencer"
+}
