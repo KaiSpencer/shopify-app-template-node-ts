@@ -1,9 +1,9 @@
 import { AuthQuery, BillingSettings, Shopify } from "@shopify/shopify-api";
-import { gdprTopics } from "@shopify/shopify-api/dist/webhooks/registry.js";
+import { gdprTopics } from "@shopify/shopify-api/dist/webhooks/registry";
 import { Application } from "express";
-import ensureBilling from "../helpers/ensure-billing.js";
-import redirectToAuth from "../helpers/redirect-to-auth.js";
-import { BillingSettingsType } from "../index.js";
+import ensureBilling from "../helpers/ensure-billing";
+import redirectToAuth from "../helpers/redirect-to-auth";
+import { BillingSettingsType } from "../index";
 
 export default function applyAuthMiddleware(
   app: Application,
@@ -17,7 +17,7 @@ export default function applyAuthMiddleware(
     return redirectToAuth(req, res, app);
   });
 
-  app.get<any, any, any, any, AuthQuery>(
+  app.get<unknown, unknown, unknown, AuthQuery>(
     "/api/auth/callback",
     async (req, res) => {
       try {
