@@ -29,7 +29,7 @@ export default function verifyRequest(
     let shop = Shopify.Utils.sanitizeShop(req.query.shop);
     if (session && shop && session.shop !== shop) {
       // The current request is for a different shop. Redirect gracefully.
-      return redirectToAuth(req, res, app);
+      return redirectToAuth(app)(req, res);
     }
 
     if (session?.isActive()) {

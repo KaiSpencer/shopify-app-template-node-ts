@@ -128,11 +128,16 @@ export async function createServer(
       res,
       app.get("use-online-tokens"),
     );
-    let status = 200;
-    let error = null;
+    let status: number = 200;
+    let error: string | null = null;
 
     try {
-      await productCreator(session);
+      if (session != null) {
+        await productCreator(session);
+      } else {
+        status = 401;
+        error = 'Session is null';
+      }
     } catch (e: any) {
       console.log(`Failed to process products/create: ${e.message}`);
       status = 500;
@@ -186,7 +191,7 @@ export async function createServer(
     const appInstalled = await AppInstallations.includes(shop);
 
     if (!appInstalled && !req.originalUrl.match(/^\/exitiframe/i)) {
-      return redirectToAuth(req, res, app);
+      return redirectToAuth(app)(req, res);
     }
 
     if (Shopify.Context.IS_EMBEDDED_APP && req.query.embedded !== "1") {
