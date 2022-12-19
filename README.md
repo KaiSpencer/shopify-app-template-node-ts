@@ -18,6 +18,7 @@ This is a template for building a [Shopify app](https://shopify.dev/apps/getting
 <table>
   <tbody>
     <tr>
+      <td align="center"><a href="https://github.com/KaiSpencer"><img src="https://avatars.githubusercontent.com/u/51139521?v=4?s=100" width="100px;" alt="Kai Spencer"/><br /><sub><b>Kai Spencer</b></sub></a><br /><a href="https://github.com/KaiSpencer/shopify-app-template-node-ts/commits?author=KaiSpencer" title="Code">💻</a></td>
       <td align="center"><a href="https://github.com/cyrilchapon"><img src="https://avatars.githubusercontent.com/u/10728426?v=4?s=100" width="100px;" alt="Cyril CHAPON"/><br /><sub><b>Cyril CHAPON</b></sub></a><br /><a href="https://github.com/KaiSpencer/shopify-app-template-node-ts/commits?author=cyrilchapon" title="Code">💻</a></td>
     </tr>
   </tbody>
