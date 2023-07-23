@@ -1,12 +1,11 @@
 import { useState } from "react";
 import {
-  Card,
-  Heading,
-  TextContainer,
-  DisplayText,
-  TextStyle,
+  LegacyCard,
+  Text,
+  VerticalStack,
 } from "@shopify/polaris";
 import { Toast } from "@shopify/app-bridge-react";
+import { useTranslation } from "react-i18next";
 import { useAppQuery, useAuthenticatedFetch } from "../hooks";
 
 export function ProductsCard() {
@@ -16,6 +15,8 @@ export function ProductsCard() {
   const [isLoading, setIsLoading] = useState(true);
   const [toastProps, setToastProps] = useState(emptyToastProps);
   const fetch = useAuthenticatedFetch();
+  const { t } = useTranslation();
+  const productsCount = 5;
 
   const {
     data,
@@ -32,7 +33,7 @@ export function ProductsCard() {
   });
 
   const toastMarkup = toastProps.content && !isRefetchingCount && (
-    <Toast {...toastProps} onDismiss={() => setToastProps(emptyToastProps)} />
+      <Toast {...toastProps} onDismiss={() => setToastProps(emptyToastProps)} />
   );
 
   const handlePopulate = async () => {
@@ -41,43 +42,44 @@ export function ProductsCard() {
 
     if (response.ok) {
       await refetchProductCount();
-      setToastProps({ content: "5 products created!" });
+      setToastProps({
+        content: t("ProductsCard.productsCreatedToast", {
+          count: productsCount,
+        }),
+      });
     } else {
       setIsLoading(false);
       setToastProps({
-        content: "There was an error creating products",
+        content: t("ProductsCard.errorCreatingProductsToast"),
         error: true,
       });
     }
   };
 
   return (
-    <>
-      {toastMarkup}
-      <Card
-        title='Product Counter'
-        sectioned
-        primaryFooterAction={{
-          content: "Populate 5 products",
-          onAction: handlePopulate,
-          loading: isLoading,
-        }}
-      >
-        <TextContainer spacing='loose'>
-          <p>
-            Sample products are created with a default title and price. You can
-            remove them at any time.
-          </p>
-          <Heading element='h4'>
-            TOTAL PRODUCTS
-            <DisplayText size='medium'>
-              <TextStyle variation='strong'>
+      <>
+        {toastMarkup}
+        <LegacyCard
+            title={t("ProductsCard.title")}
+            sectioned
+            primaryFooterAction={{
+              content: t("ProductsCard.populateProductsButton", {
+                count: productsCount,
+              }),
+              onAction: handlePopulate,
+              loading: isLoading,
+            }}
+        >
+          <VerticalStack gap='5'>
+            <p>{t("ProductsCard.description")}</p>
+            <Text as={"h4"} variant="headingMd">
+              {t("ProductsCard.totalProductsHeading")}
+              <Text variant="bodyMd" as="p" fontWeight="semibold">
                 {isLoadingCount ? "-" : data.count}
-              </TextStyle>
-            </DisplayText>
-          </Heading>
-        </TextContainer>
-      </Card>
-    </>
+              </Text>
+            </Text>
+          </VerticalStack>
+        </LegacyCard>
+      </>
   );
 }
